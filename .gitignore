@@ -8,6 +8,11 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.vcxproj
+*.filters
+WordBrain.sln
+WordBrain/targetver.h
+WordBrain/resource.h
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
