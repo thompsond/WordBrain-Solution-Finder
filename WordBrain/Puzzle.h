@@ -13,7 +13,7 @@ namespace WordBrain {
 		vector<vector<char>> puzzle;
 		set<string> dictWords;
 		set<string> words;
-		int counter = 0;
+
 
 		enum Direction : int {
 			N,
@@ -31,6 +31,6 @@ namespace WordBrain {
 		void getSolutions(size_t row, size_t col, string word, size_t wordLength, set<pair<size_t, size_t>> usedLocations);
 		void setPuzzle(vector< vector<char> >& puzzle);
 		bool isValid(size_t row, size_t col, set<pair<size_t, size_t>> usedLocations);
-
+		pair<size_t, size_t> findNeighbor(size_t row, size_t col, size_t d);
 	};
 }

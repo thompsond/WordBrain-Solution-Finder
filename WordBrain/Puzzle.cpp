@@ -61,44 +61,11 @@ namespace WordBrain {
 			// Look for a neighbor in each possible direction
 			for (size_t d = Direction::N; d != Direction::LAST; d++) {
 				size_t neighborRow, neighborCol;
-				switch (d) {
-					case Puzzle::N:
-						neighborRow = row - 1;
-						neighborCol = col;
-						break;
-					case Puzzle::S:
-						neighborRow = row + 1;
-						neighborCol = col;
-						break;
-					case Puzzle::E:
-						neighborRow = row;
-						neighborCol = col + 1;
-						break;
-					case Puzzle::W:
-						neighborRow = row;
-						neighborCol = col - 1;
-						break;
-					case Puzzle::NE:
-						neighborRow = row - 1;
-						neighborCol = col + 1;
-						break;
-					case Puzzle::NW:
-						neighborRow = row - 1;
-						neighborCol = col - 1;
-						break;
-					case Puzzle::SE:
-						neighborRow = row + 1;
-						neighborCol = col + 1;
-						break;
-					case Puzzle::SW:
-						neighborRow = row + 1;
-						neighborCol = col - 1;
-						break;
-					case Puzzle::LAST:
-						return;
-						break;
-				}
+				pair<size_t, size_t> point = findNeighbor(row, col, d);
+				neighborRow = point.first;
+				neighborCol = point.second;
 
+				// Search for the next piece if the neighbor piece is valid
 				if (isValid(neighborRow, neighborCol, usedLocations)) {
 					word += puzzle[neighborRow][neighborCol]; // choose
 					getSolutions(neighborRow, neighborCol, word, wordLength, usedLocations); // explore
@@ -109,6 +76,47 @@ namespace WordBrain {
 				}
 			}
 		}
+	}
+
+	pair<size_t, size_t> Puzzle::findNeighbor(size_t row, size_t col, size_t d) {
+		size_t neighborRow = -1, neighborCol = -1;
+		switch (d) {
+			case Puzzle::N:
+				neighborRow = row - 1;
+				neighborCol = col;
+				break;
+			case Puzzle::S:
+				neighborRow = row + 1;
+				neighborCol = col;
+				break;
+			case Puzzle::E:
+				neighborRow = row;
+				neighborCol = col + 1;
+				break;
+			case Puzzle::W:
+				neighborRow = row;
+				neighborCol = col - 1;
+				break;
+			case Puzzle::NE:
+				neighborRow = row - 1;
+				neighborCol = col + 1;
+				break;
+			case Puzzle::NW:
+				neighborRow = row - 1;
+				neighborCol = col - 1;
+				break;
+			case Puzzle::SE:
+				neighborRow = row + 1;
+				neighborCol = col + 1;
+				break;
+			case Puzzle::SW:
+				neighborRow = row + 1;
+				neighborCol = col - 1;
+				break;
+			case Puzzle::LAST:
+				break;
+		}
+		return pair<size_t, size_t>(neighborRow, neighborCol);
 	}
 
 	bool Puzzle::isValid(size_t row, size_t col, set<pair<size_t, size_t>> usedLocations) {
